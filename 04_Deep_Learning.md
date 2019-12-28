@@ -169,7 +169,7 @@ NAND 게이트를 표현하려면 예를 들어 (w1, w2, θ) = (-0.5, -0.5, -0.7
 
 OR 게이트는 입력 신호 중 하나 이상이 1이면 출력이 1이 되는 논리 회로입니다.
 
-![](C:\Users\mseok\TIL\image\OR_gate.jpg)
+![OR_gate.jpg](./images/OR_gate.jpg)
 
 ## Keras Model, with transfer learning
 

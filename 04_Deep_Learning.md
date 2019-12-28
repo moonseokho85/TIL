@@ -147,6 +147,30 @@ x1과 x2는 입력 신호, y는 출력 신호, w1과 w2는 가중치를 뜻합�
 
 > Linear combination 의 결과값이 Non-linear Function을 거치게 하여 최종 출력값을 계산
 
+
+
+### 단순한 논리 회로
+
+#### 1. AND 게이트
+
+AND 게이트는 입력이 둘이고 출력은 하나입니다. 입력 신호와 출력 신호의 대응 표를 **진리표**라고 합니다. 다음은 AND 게이트의 진리표인데, 두 입력이 모두 1일 때만 1을 출력하고, 그 외에는 0을 출력합니다.
+
+![](http://pds26.egloos.com/pds/201303/28/12/f0037512_5153b6eac6895.jpg)
+
+가령 (w1, w2, θ)가 (0.5, 0.5, 0.7)일 때, 또 (0.5, 0.5, 0.8)이나 (1.0, 1.0, 1.0) 때 모두 AND 게이트의 조건을 만족합니다. 매개변수를 이렇게 설정하면, x1과 x2 모두가 1일 때만 가중 신호의 총합이 주어진 임계값을 웃돌게 됩니다. 
+
+#### 2. NAND 게이트와 OR 게이트
+
+NAND는 Not AND를 의미하며, 그 동작은 AND 게이트의 출력을 뒤집은 것이 됩니다.
+
+![](http://thumbnail.egloos.net/460x0/http://pds26.egloos.com/pds/201303/28/12/f0037512_5153c1b1ac4cc.jpg)
+
+NAND 게이트를 표현하려면 예를 들어 (w1, w2, θ) = (-0.5, -0.5, -0.7) 조합이 있습니다. 사실 AND 게이트를 구현하는 매개변수의 부호를 모두 반전하기만 하면 NAND 게이트가 됩니다.
+
+OR 게이트는 입력 신호 중 하나 이상이 1이면 출력이 1이 되는 논리 회로입니다.
+
+![](C:\Users\mseok\TIL\image\OR_gate.jpg)
+
 ## Keras Model, with transfer learning
 
 A neural network classifier is made of several layers of neurons. For image classification these can be **dense** or, more frequently, **convolutional** layers. They are typically activated with relu activation function. The last layer uses as many neurons as there are classes and is activated with *softmax*.
@@ -178,8 +202,6 @@ model.fit(dataset, ... )
 
 
 ### Dense neural network
-
-
 
 This is the simplest neural network for classifying images. It is made of "neurons" arranged in layers. The first layer processes input data and feeds its outputs into other layers. It is called "dense" because each neuron is connected to all the neurons in the previous layer.
 

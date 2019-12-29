@@ -17,13 +17,13 @@ $ yarn start # 또는 npm start
 
 이렇게 명령어를 입력하면 다음과 같은 화면이 나옵니다.
 
-![react_yarn_start_result](C:\Users\mseok\TIL\images\react_yarn_start_result.png)
+![react_yarn_start_result](..\images\react_yarn_start_result.png)
 
 그리고 브라우저에서 자동으로 페이지가 띄워질 것입니다. 만약 페이지가 자동으로 열리지 않았다면 브라우저 주소창에 다음 링크를 직접 입력하여 열어 보세요.
 
 * http://localhost:3000
 
-![react-auto-page](C:\Users\mseok\TIL\images\react_auto_page.png)
+![react-auto-page](..\images\react_auto_page.png)
 
 ### 코드 이해하기
 
@@ -74,7 +74,7 @@ import React from 'react';
 
 
 
-![code_bundle](C:\Users\mseok\TIL\images\code_bundle.jpg)
+![code_bundle](..\images\code_bundle.jpg)
 
 
 
@@ -263,7 +263,7 @@ export default App;
 
 
 
-![react_compile_error](C:\Users\mseok\TIL\images\react_compile_error.png)
+![react_compile_error](..\images\react_compile_error.png)
 
 
 

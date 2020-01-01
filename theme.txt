@@ -1,0 +1,1 @@
+jt -t gruvboxd -fs 11 -tfs 12 -dfs 9 -nfs 11 -ofs 11 -f office -cellw 80% -T -N

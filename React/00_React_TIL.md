@@ -434,3 +434,118 @@ export default App;
 ```
 
 이렇게 코드를 작성한 후 저장하면 브라우저에서 '리액트입니다.' 라는 문구를 볼 수 있습니다. 하지만 name 값을 다음과 같이 다른 값으로 바꾸면, '리액트가 아닙니다.'라는 문구가 나타날 것입니다.
+
+#### AND 연산자(&&)를 사용한 조건부 렌더링
+
+개발을 하다 보면 특정 조건을 만족할 때 내용을 보여주고, 만족하지 않을 때 아예 아무것도 렌더링하지 않아야 하는 상황이 올 수 있습니다. 이럴 때도 조건부 연산자를 통해 구현할 수는 있습니다.
+
+**src/App.js**
+
+```react
+import React from 'react';
+
+function App() {
+    const name = '뤼액트';
+    return <div>{name === '리액트' ? <h1>리액트입니다.</h1> : null}</div>
+}
+
+export default App;
+```
+
+위 코드와 같이 null을 렌더링하면 아무것도 보여 주지 않습니다.
+
+하지만 이것보다 더 짧은 코드로 똑같은 작업을 할 수 있습니다. 다음과 같이 && 연산자를 사용해서 조건부 렌더링을 할 수 있습니다.
+
+**src/App.js**
+
+```react
+import React from 'react';
+
+function App(){
+    const name = '뤼액트';
+    return <div>{name === '리액트' && <h1>리액트입니다.</h1>}</div>;
+}
+
+export default App;
+```
+
+이렇게 코드를 작성하고 나면 브라우저에 아무것도 나타나지 않을 것입니다. 다시 name 값을 리액트로 설정하면 '리액트입니다.'가 나타날 것입니다.
+
+&& 연산자가 가능한 이유는 false를 렌더링 할 때 null과 똑같이 아무것도 화면에 표시하지 않습니다. 하지만 falsy한 값인 0은 예외적으로 나타납니다.
+
+#### undefined를 렌더링하지 않음
+
+리액트 컴포넌트에서는 함수에서 undefined만 반환하여 렌더링해서는 안됩니다.
+
+**src/App.js**
+
+```react
+import React from 'react';
+import './App.css';
+
+function App(){
+    const name = undefined;
+    return name
+}
+
+export default App;
+```
+
+브라우저를 확인해 보면 다음과 같은 오류를 볼 수 있습니다.
+
+![image](C:\Users\mseok\TIL\React\images\undefined_render_error.png)
+
+어떤 값이 undefined일 수도 있다면, OR(||)를 사용하면 undefined일 때 사용할 값을 지정할 수 있습니다. 고로 오류를 방지할 수 있습니다.
+
+```react
+import React from 'react';
+import './App.css';
+
+function App(){
+    const name = undefined;
+    return name || '값이 undefined입니다.'
+}
+
+export default App;
+```
+
+JSX 내부에서 undefined를 렌더링하는 것도 가능하다.
+
+```react
+import React from 'react';
+import './App.css';
+
+function App(){
+    const name = undefined;
+    return <div>{name}</div>;
+}
+
+export default App;
+```
+
+#### 인라인 스타일링
+
+리액트에서 DOM 요소에 스타일을 적용할 때는 문자열 형태로 넣는 것이 아니라 객체 형태로 넣어야 합니다. 
+
+**src/App.js**
+
+```react
+import React from 'react';
+
+function App(){
+    const name = '리액트';
+    const style = {
+        backgroundColor: 'black',
+        color:'aqua',
+        fontSize: '48px',
+        fontWeight: 'bold',
+        padding: 16
+    };
+    return <div style={style}>{name}</div>
+}
+
+export default App;
+```
+
+지금은 style 객체를 미리 선언하고 div의 style 값으로 지정했지만 바로 style 값을 지정하고 싶다면 안에 넣어주면 됩니다.
+

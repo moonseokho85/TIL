@@ -8,3 +8,4 @@
 5. 감정 분석
 6. Matplotlib
 7. OpenCV
+8. Face Detection

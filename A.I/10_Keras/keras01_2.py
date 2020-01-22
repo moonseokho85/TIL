@@ -1,4 +1,4 @@
-# ------------------ batch size default = 32 ------------------
+# batch_size default
 
 import numpy as np
 

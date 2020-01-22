@@ -1,4 +1,5 @@
-# 파라미터 튜닝 => loss = 0.0001
+# parameter tuning => loss = 0.0001
+
 import numpy as np
 
 # 데이터

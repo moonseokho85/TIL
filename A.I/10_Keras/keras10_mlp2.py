@@ -1,8 +1,18 @@
 import numpy as np
 
 # 데이터
-x = np.array(range(1, 101))
-y = np.array(range(1, 101)) # (100,)
+x = np.array([range(1, 101), range(101, 201), range(301, 401)])
+y = np.array([range(101, 201)])
+y2 = np.array(range(101, 201))
+
+print(x.shape) # (3, 100)
+print(y.shape) # (1, 100)
+
+x = np.transpose(x) # x = x.reshape((10, 2))
+y = np.transpose(y) # y = y.reshape((10, 2))
+
+print(x.shape) # (100, 3)
+print(y.shape) # (100, 1)
 
 # 데이터 Set 나누기
 from sklearn.model_selection import train_test_split
@@ -12,7 +22,7 @@ from sklearn.model_selection import train_test_split
 # x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, test_size=0.25, shuffle=False)
 
 # 더 좋은 코드
-x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=0.6, random_state=66, shuffle=False)
+x_train, x_test, y_train, y_test = train_test_split(x, y2, train_size=0.6, random_state=66, shuffle=False)
 x_test, x_val, y_test, y_val = train_test_split(x_test, y_test, test_size=0.5, random_state=66, shuffle=False)
 
 # 데이터 확인
@@ -25,10 +35,9 @@ from keras.models import Sequential
 from keras.layers import Dense
 model = Sequential()
 
-# model.add(Dense(5, input_dim=1))
-model.add(Dense(5, input_shape=(1,)))
-model.add(Dense(2))
-model.add(Dense(3))
+# model.add(Dense(5, input_dim=3))
+model.add(Dense(64, input_shape=(3,)))
+model.add(Dense(38))
 model.add(Dense(1))
 
 # 모델 요약
@@ -36,19 +45,23 @@ model.summary()
 
 # 훈련
 model.compile(loss='mse', optimizer='adam', metrics=["mse"]) # kinds of loss = [mse, mae]
-model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=100, batch_size=1) # epochs number changeable
+model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=100, batch_size=100) # epochs number changeable
 
 # 평가예측
-loss, mse = model.evaluate(x_test, y_test, batch_size=1)
+loss, mse = model.evaluate(x_test, y_test, batch_size=100)
 print('loss: ', loss)
 print('mse: ', mse)
-print('rmse: ', np.sqrt(mse))
+# print('rmse: ', np.sqrt(mse)) # RMSE 구하는 또 다른 방법
 
-x_prd = np.array([101, 102, 103])
-aaa = model.predict(x_prd, batch_size=1)
+x_prd = np.array([[201, 202, 203], [204, 205, 206], [207, 208, 209]])
+print(x_prd.shape)
+x_prd = np.transpose(x_prd)
+print(x_prd.shape)
+
+aaa = model.predict(x_prd, batch_size=100)
 print(aaa)
 
-y_predict = model.predict(x_test, batch_size=1)
+y_predict = model.predict(x_test, batch_size=100)
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error

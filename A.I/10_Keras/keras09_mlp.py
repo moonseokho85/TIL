@@ -1,8 +1,14 @@
 import numpy as np
 
 # 데이터
-x = np.array(range(1, 101))
-y = np.array(range(1, 101))
+x = np.array([range(1, 101), range(101, 201)])
+y = np.array([range(1, 101), range(101, 201)])
+
+x = np.transpose(x) # x = x.reshape((10, 2))
+y = np.transpose(y) # y = y.reshape((10, 2))
+
+print(x.shape)
+print(y.shape)
 
 # 데이터 Set 나누기
 from sklearn.model_selection import train_test_split
@@ -26,29 +32,31 @@ from keras.layers import Dense
 model = Sequential()
 
 # model.add(Dense(5, input_dim=1))
-model.add(Dense(5, input_shape=(1,)))
+model.add(Dense(64, input_shape=(2,)))
+model.add(Dense(32))
+model.add(Dense(18))
 model.add(Dense(2))
-model.add(Dense(3))
-model.add(Dense(1))
 
 # 모델 요약
 model.summary()
 
 # 훈련
 model.compile(loss='mse', optimizer='adam', metrics=["mse"]) # kinds of loss = [mse, mae]
-model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=100, batch_size=1) # epochs number changeable
+model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=2000, batch_size=2) # epochs number changeable
 
 # 평가예측
-loss, mse = model.evaluate(x_test, y_test, batch_size=1)
+loss, mse = model.evaluate(x_test, y_test, batch_size=2)
 print('loss: ', loss)
 print('mse: ', mse)
-print('rmse: ', np.sqrt(mse))
+# print('rmse: ', np.sqrt(mse)) # RMSE 구하는 또 다른 방법
 
-x_prd = np.array([101, 102, 103])
-aaa = model.predict(x_prd, batch_size=1)
+x_prd = np.array([[201, 202, 203],[204, 205, 206]])
+x_prd = np.transpose(x_prd)
+
+aaa = model.predict(x_prd, batch_size=2)
 print(aaa)
 
-y_predict = model.predict(x_test, batch_size=1)
+y_predict = model.predict(x_test, batch_size=2)
 
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error

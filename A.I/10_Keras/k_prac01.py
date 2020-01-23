@@ -6,19 +6,25 @@ from keras.datasets import mnist
 print("shape: ", train_images.shape)
 print("label_count: ", len(train_labels))
 print(train_labels)
+print(train_labels.shape)
 
 # 테스트 데이터를 살펴봅니다.
 print("shape: ", test_images.shape)
 print("label_count: ", len(test_labels))
 print(test_labels)
+print(test_labels.shape)
 
 # 모델 구성
 from keras import models
 from keras import layers
 
 network = models.Sequential()
+
 network.add(layers.Dense(512, activation='relu', input_shape=(28 * 28,)))
 network.add(layers.Dense(10, activation='softmax'))
+
+# 모델 요약
+network.summary()
 
 # 컴파일 단계
 network.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])

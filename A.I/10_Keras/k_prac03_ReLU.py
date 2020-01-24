@@ -21,6 +21,6 @@ def native_add(x, y):
 
 import numpy as np
 
-z = x + y
+z = x + y # 원소별 덧셈
 
-z = np.maximum(z, 0.)
+z = np.maximum(z, 0.) # 원소별 ReLU 함수

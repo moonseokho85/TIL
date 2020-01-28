@@ -31,9 +31,10 @@ from keras.layers import Dense, Input
 # 함수형 모델은 모델끼리 붙이고 합치고가 가능함 = 앙상블 모델을 구성하는등에 사용
 
 input1 = Input(shape=(3,)) #인풋레이어 정의 
-dense1 = Dense(5)(input1) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
-dense2 = Dense(3)(dense1)
-output1 = Dense(4)(dense2)
+dense1 = Dense(64)(input1) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
+dense2 = Dense(32)(dense1)
+dense3 = Dense(18)(dense2)
+output1 = Dense(9)(dense3)
 
 # input2 = Input(shape=(3,)) #인풋레이어 정의 
 # dense21 = Dense(7)(input2) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
@@ -78,10 +79,10 @@ model.summary()
 
 # model.fit = 훈련
 model.compile(loss= 'mse', optimizer= 'adam', metrics= ['mae'])
-model.fit(x1_train, [y1_train, y2_train, y3_train], validation_data=(x1_val, [y1_val, y2_val, y3_val]), epochs = 100, batch_size=58) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
+model.fit(x1_train, [y1_train, y2_train, y3_train], validation_data=(x1_val, [y1_val, y2_val, y3_val]), epochs = 1000, batch_size= 1) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
 
 # 평가 예측
-result = model.evaluate(x1_test, [y1_test, y2_test, y3_test], batch_size = 1)
+result = model.evaluate(x1_test, [y1_test, y2_test, y3_test], batch_size= 1)
 print('result: ', result)
 
 x1_prd = np.array([[201,202,203], [204,205,206], [207,208,209]]) # 한개가 더 늘어나야함
@@ -90,13 +91,13 @@ x1_prd = np.array([[201,202,203], [204,205,206], [207,208,209]]) # 한개가 더
 x1_prd = np.transpose(x1_prd)
 # x2_prd = np.transpose(x2_prd)
 
-aaa = model.predict(x1_prd, batch_size=1)
+aaa = model.predict(x1_prd, batch_size= 1)
 print(aaa)
 
 # bbb = model.predict(x, batch_size=1)
 # print(bbb)
 
-y_predict = model.predict(x1_test, batch_size=1)
+y_predict = model.predict(x1_test, batch_size= 1)
 print(np.asarray(y_predict).shape) # (20, 3) * 3 list
 print(y_predict[0])
 

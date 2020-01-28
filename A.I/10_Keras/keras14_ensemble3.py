@@ -1,7 +1,7 @@
 import numpy as np
 # 데이터 정제
 x1 = np.array([range(1,101), range(101,201), range(301,401)])
-x2 = np.array([range(1001,1101), range(1101,1201), range(1301,1401)])
+# x2 = np.array([range(1001,1101), range(1101,1201), range(1301,1401)])
 
 # y1 = np.array([range(101,201)])
 
@@ -11,7 +11,7 @@ y3 = np.array([range(1,101), range(101,201), range(301,401)])
 
 # 행과열 변환
 x1 = np.transpose(x1)
-x2 = np.transpose(x2)
+# x2 = np.transpose(x2)
 y1 = np.transpose(y1)
 y2 = np.transpose(y2)
 y3 = np.transpose(y3)
@@ -19,8 +19,8 @@ y3 = np.transpose(y3)
 # 데이터 Set 나누기
 from sklearn.model_selection import train_test_split
 
-x1_train, x1_test, x2_train, x2_test, y1_train, y1_test, y2_train, y2_test, y3_train, y3_test = train_test_split(x1, x2, y1, y2, y3, train_size=0.6, random_state=66, shuffle = False)
-x1_val, x1_test, x2_val, x2_test, y1_val, y1_test, y2_val, y2_test, y3_val, y3_test = train_test_split(x1_test, x2_test, y1_test, y2_test, y3_test, test_size=0.5, random_state=66, shuffle = False)
+x1_train, x1_test, y1_train, y1_test, y2_train, y2_test, y3_train, y3_test = train_test_split(x1, y1, y2, y3, train_size=0.6, random_state=66, shuffle = False)
+x1_val, x1_test, y1_val, y1_test, y2_val, y2_test, y3_val, y3_test = train_test_split(x1_test, y1_test, y2_test, y3_test, test_size=0.5, random_state=66, shuffle = False)
 
 # 모델 구성
 from keras.models import Sequential, Model
@@ -32,34 +32,33 @@ from keras.layers import Dense, Input
 
 input1 = Input(shape=(3,)) #인풋레이어 정의 
 dense1 = Dense(5)(input1) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
-dense2 = Dense(2)(dense1) # 계속 인풋과 아웃풋을 정의
-dense3 = Dense(3)(dense2)
-output1 = Dense(11)(dense3)
+dense2 = Dense(3)(dense1)
+output1 = Dense(4)(dense2)
 
-input2 = Input(shape=(3,)) #인풋레이어 정의 
-dense21 = Dense(7)(input2) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
-dense23 = Dense(4)(dense21)
-output2 = Dense(5)(dense23)
+# input2 = Input(shape=(3,)) #인풋레이어 정의 
+# dense21 = Dense(7)(input2) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
+# dense23 = Dense(4)(dense21)
+# output2 = Dense(5)(dense23)
 
-from keras.layers.merge import concatenate
-merge1 = concatenate([output1, output2])
+# from keras.layers.merge import concatenate
+# merge1 = concatenate([output1, output2])
 
-middle1 = Dense(4)(merge1)
-middle2 = Dense(7)(middle1)
-middle3 = Dense(1)(middle2) # 현재 merge된 마지막 레이어
+# middle1 = Dense(4)(merge1)
+# middle2 = Dense(7)(middle1)
+# middle3 = Dense(1)(middle2) # 현재 merge된 마지막 레이어
 
-output_1 = Dense(30)(middle3) # 1번째 아웃풋 모델
+output_1 = Dense(2)(output1) # 1번째 아웃풋 모델
 output_1 = Dense(3)(output_1)
 
-output_2 = Dense(30)(middle3) # 2번째 아웃풋 모델
-output_2 = Dense(5)(output_2)
+output_2 = Dense(4)(output1) # 2번째 아웃풋 모델
+output_2 = Dense(4)(output_2)
 output_2 = Dense(3)(output_2)
 
-output_3 = Dense(30)(middle3) # 3번째 아웃풋 모델
+output_3 = Dense(5)(output1) # 3번째 아웃풋 모델
 output_3 = Dense(3)(output_3)
 
 
-model = Model(inputs = [input1, input2], outputs = [output_1, output_2, output_3]) #하단부에 모델을 정의
+model = Model(inputs= input1, outputs= [output_1, output_2, output_3]) #하단부에 모델을 정의
 
 '''
 # Sequential Model
@@ -78,27 +77,26 @@ model.summary()
 # optimizer = 통상적으로 80%으로 먹혀 들어감 대게 이걸 사용
 
 # model.fit = 훈련
-model.compile(loss= 'mse', optimizer= 'adam', metrics= ['acc'])
-model.fit([x1_train, x2_train], [y1_train, y2_train, y3_train], validation_data=([x1_val, x2_val], [y1_val, y2_val, y3_val]), epochs = 100, batch_size=58) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
+model.compile(loss= 'mse', optimizer= 'adam', metrics= ['mae'])
+model.fit(x1_train, [y1_train, y2_train, y3_train], validation_data=(x1_val, [y1_val, y2_val, y3_val]), epochs = 100, batch_size=58) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
 
 # 평가 예측
-result = model.evaluate([x1_test, x2_test], [y1_test, y2_test, y3_test], batch_size = 1)
+result = model.evaluate(x1_test, [y1_test, y2_test, y3_test], batch_size = 1)
 print('result: ', result)
 
-
 x1_prd = np.array([[201,202,203], [204,205,206], [207,208,209]]) # 한개가 더 늘어나야함
-x2_prd = np.array([[1201,1202,1203], [1204,1205,1206], [1207,1208,1209]])
+# x2_prd = np.array([[1201,1202,1203], [1204,1205,1206], [1207,1208,1209]])
 
 x1_prd = np.transpose(x1_prd)
-x2_prd = np.transpose(x2_prd)
+# x2_prd = np.transpose(x2_prd)
 
-aaa = model.predict([x1_prd, x2_prd], batch_size=1)
+aaa = model.predict(x1_prd, batch_size=1)
 print(aaa)
 
 # bbb = model.predict(x, batch_size=1)
 # print(bbb)
 
-y_predict = model.predict([x1_test, x2_test], batch_size=1)
+y_predict = model.predict(x1_test, batch_size=1)
 print(np.asarray(y_predict).shape) # (20, 3) * 3 list
 print(y_predict[0])
 

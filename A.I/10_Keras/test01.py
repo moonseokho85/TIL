@@ -1,4 +1,5 @@
-print("아잉")
+import numpy as np
 
-import tensorflow as tf
-import keras
+x = np.random.random((64, 3, 32, 10))
+
+print(x)

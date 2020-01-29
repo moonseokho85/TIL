@@ -2,7 +2,7 @@ from numpy import array
 from keras.models import Sequential, Model
 from keras.layers import Dense, LSTM, Input
 
-# 데이터 준비
+# 데이터 준비 (x1, y1 and x2, y2 는 shape가 같아야 Ensemble에서 쓸 수 있다.)
 x1 = array([[1, 2, 3], [2, 3, 4], [3, 4, 5], [4, 5, 6], [5, 6, 7], [6, 7, 8], [7, 8, 9], [8, 9, 10], [9, 10, 11], [10, 11, 12], [20, 30, 40], [30, 40, 50], [40, 50, 60]])
 y1 = array([4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 50, 60, 70])
 

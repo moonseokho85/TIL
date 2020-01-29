@@ -23,19 +23,22 @@ from keras.layers import Dense, Input
 # 시퀀셜 모델의 단점 : 순차적으로 하니까 쉽긴 한데 딱 한가지 모델만 만들어야함
 # 함수형 모델은 모델끼리 붙이고 합치고가 가능함 = 앙상블 모델을 구성하는등에 사용
 
-input1 = Input(shape=(3,)) #인풋레이어 정의 
-dense1 = Dense(5)(input1) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
+input1 = Input(shape=(3,)) # 인풋레이어 정의 
+dense1 = Dense(5)(input1) # 차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
 dense2 = Dense(2)(dense1) # 계속 인풋과 아웃풋을 정의
 dense3 = Dense(3)(dense2)
 output1 = Dense(1)(dense3)
 
-input2 = Input(shape=(3,)) #인풋레이어 정의 
-dense21 = Dense(7)(input2) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
+input2 = Input(shape=(3,)) # 인풋레이어 정의 
+dense21 = Dense(7)(input2) # 차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
 dense23 = Dense(4)(dense21)
 output2 = Dense(5)(dense23)
 
-from keras.layers.merge import concatenate
-merge1 = concatenate([output1, output2])
+# from keras.layers.merge import concatenate # 1. 함수형 concatenate
+# merge1 = concatenate([output1, output2])
+
+from keras.layers.merge import Concatenate # 2. class형 Concatenate
+merge1 = Concatenate()([output1, output2])
 
 middle1 = Dense(4)(merge1)
 middle2 = Dense(7)(middle1)
@@ -61,10 +64,10 @@ model.summary()
 
 # model.fit = 훈련
 model.compile(loss='mse', optimizer = 'adam', metrics = ['mse'])
-model.fit([x1_train, x2_train], y1_train, validation_data=([x1_val, x2_val], y1_val), epochs = 100, batch_size=58) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
+model.fit([x1_train, x2_train], [y1_train], validation_data=([x1_val, x2_val], [y1_val]), epochs = 100, batch_size= 1) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
 
 # 평가 예측
-loss, mse = model.evaluate([x1_test, x2_test], y1_test, batch_size = 1)
+loss, mse = model.evaluate([x1_test, x2_test], [y1_test], batch_size= 1)
 print('mse: ', mse)
 
 x1_prd = np.array([[201,202,203], [204,205,206], [207,208,209]]) #한개가 더 늘어나야함
@@ -74,12 +77,14 @@ x1_prd = np.transpose(x1_prd)
 x2_prd = np.transpose(x2_prd)
 
 aaa = model.predict([x1_prd, x2_prd], batch_size=1)
-print(aaa)
+print("aaa: ", aaa)
 
 # bbb = model.predict(x, batch_size=1)
 # print(bbb)
 
 y_predict = model.predict([x1_test, x2_test], batch_size=1)
+print("y_predict: ", y_predict)
+
 # RMSE 구하기
 from sklearn.metrics import mean_squared_error
 def RMSE(y_test, y_predict):

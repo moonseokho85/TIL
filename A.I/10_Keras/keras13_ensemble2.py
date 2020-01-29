@@ -30,8 +30,8 @@ from keras.layers import Dense, Input
 # 시퀀셜 모델의 단점 : 순차적으로 하니까 쉽긴 한데 딱 한가지 모델만 만들어야함
 # 함수형 모델은 모델끼리 붙이고 합치고가 가능함 = 앙상블 모델을 구성하는등에 사용
 
-input1 = Input(shape=(3,)) #인풋레이어 정의 
-dense1 = Dense(5)(input1) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
+input1 = Input(shape=(3,)) # 인풋레이어 정의 
+dense1 = Dense(5)(input1) # 차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
 dense2 = Dense(2)(dense1) # 계속 인풋과 아웃풋을 정의
 dense3 = Dense(3)(dense2)
 output1 = Dense(11)(dense3)

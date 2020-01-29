@@ -36,19 +36,19 @@ from keras.layers import Dense, Input
 # 함수형 모델은 모델끼리 붙이고 합치고가 가능함 = 앙상블 모델을 구성하는등에 사용
 
 
-# input1 = Input(shape=(3,)) #인풋레이어 정의 
-# dense1 = Dense(5)(input1) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
+# input1 = Input(shape=(3,)) # 인풋레이어 정의 
+# dense1 = Dense(5)(input1) # 차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
 # dense2 = Dense(2)(dense1) # 계속 인풋과 아웃풋을 정의
 # dense3 = Dense(3)(dense2)
 # output1 = Dense(1)(dense3)
 
-input1 = Input(shape=(3,)) #인풋레이어 정의 
-x = Dense(5)(input1) #차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
+input1 = Input(shape=(3,)) # 인풋레이어 정의 
+x = Dense(5)(input1) # 차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소
 x = Dense(2)(x) # 계속 인풋과 아웃풋을 정의
 x = Dense(3)(x)
 output1 = Dense(1)(x)
 
-model = Model(inputs = input1, outputs = output1) #하단부에 모델을 정의
+model = Model(inputs = input1, outputs = output1) # 함수형 모델의 특징: 하단부에 모델을 정의
 
 
 '''

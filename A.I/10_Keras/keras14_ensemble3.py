@@ -1,3 +1,5 @@
+# 단순 분기
+
 import numpy as np
 # 데이터 정제
 x1 = np.array([range(1,101), range(101,201), range(301,401)])

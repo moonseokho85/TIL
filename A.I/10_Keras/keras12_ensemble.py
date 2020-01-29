@@ -47,7 +47,7 @@ output = Dense(1)(middle2)
 model = Model(inputs = [input1, input2], outputs = output) #하단부에 모델을 정의
 
 '''
-#시퀀셜 모델
+# Sequential Model
 model = Sequential() 
 model.add(Dense(32, input_dim = 3))
 #model.add(Dense(5, input_shape = (3,)))

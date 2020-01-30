@@ -65,7 +65,7 @@ model.summary()
 ##훈련 / compile = 사람말을 기계에게 알려주기
 # mse = 손실은 낮으면 좋다 여러가지가 있음
 # optimizer = 통상적으로 80%으로 먹혀 들어감 대게 이걸 사용
-'''
+
 #3. model.fit = 훈련
 model.compile(loss='mse', optimizer = 'adam', metrics = ['mse'])
 model.fit(x_train, y_train, validation_data=(x_val,y_val), epochs = 100, batch_size=58)
@@ -94,4 +94,3 @@ print("RMSE:", RMSE(y_test, y_predict))
 from sklearn.metrics import r2_score
 r2_y_predict = r2_score(y_test, y_predict)
 print("R2: ", r2_y_predict)
-'''

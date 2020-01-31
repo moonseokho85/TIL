@@ -1,6 +1,5 @@
 from numpy import array
 
-
 def split_sequence(sequence, n_steps):
     x, y = list(), list()
     for i in range(len(sequence)):

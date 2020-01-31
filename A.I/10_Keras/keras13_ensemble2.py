@@ -79,7 +79,12 @@ model.summary()
 
 # model.fit = 훈련
 model.compile(loss= 'mse', optimizer= 'adam', metrics= ['acc'])
-model.fit([x1_train, x2_train], [y1_train, y2_train, y3_train], validation_data=([x1_val, x2_val], [y1_val, y2_val, y3_val]), epochs = 100, batch_size=58) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
+
+from keras.callbacks import EarlyStopping, TensorBoard
+early_stopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
+tb_hist = TensorBoard(log_dir="./graph", write_images=True)
+
+model.fit([x1_train, x2_train], [y1_train, y2_train, y3_train], validation_data=([x1_val, x2_val], [y1_val, y2_val, y3_val]), callbacks=[early_stopping, tb_hist],epochs = 100, batch_size=58) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
 
 # 평가 예측
 result = model.evaluate([x1_test, x2_test], [y1_test, y2_test, y3_test], batch_size = 1)

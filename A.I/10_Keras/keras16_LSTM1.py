@@ -43,11 +43,12 @@ model.summary()
 model.compile(loss= 'mse', optimizer= 'adam', metrics= ['mae'])
 
 # EarlyStopping 선언
-from keras.callbacks import EarlyStopping
+from keras.callbacks import EarlyStopping, TensorBoard
 early_stopping = EarlyStopping(monitor='loss', patience=100, mode='auto') # monitor의 종류: loss, acc, val_loss, val_acc
+tb_hist = TensorBoard(log_dir="./graph", write_images=True)
 
 # 모델 훈련
-model.fit(x, y, epochs= 100000, verbose= 1, batch_size= 3, callbacks=[early_stopping]) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
+model.fit(x, y, epochs= 100000, verbose= 1, batch_size= 3, callbacks=[early_stopping, tb_hist]) # 앙상블 모델일 때 입력값을 리스트 형식으로 넣어준다.
 
 # 평가 예측
 loss, mae = model.evaluate(x, y, batch_size= 3)

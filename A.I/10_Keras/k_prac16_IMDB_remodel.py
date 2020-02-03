@@ -48,3 +48,5 @@ model.add(layers.Dense(1, activation='sigmoid'))
 
 model.compile(optimizer='rmsprop', loss='binary_crossentropy', metrics=['acc'])
 
+model.fit(x_train, y_train, epochs=4, batch_size=512)
+results = model.predict(x_test, y_test)

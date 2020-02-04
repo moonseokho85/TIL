@@ -49,7 +49,7 @@ from keras.layers import Dense
 model = Sequential()
 
 model.add(Dense(16, input_shape=(25,)))
-model.add(Dense(8))
+model.add(Dense(8, activation='relu'))
 model.add(Dense(1))
 
 # 모델 요약

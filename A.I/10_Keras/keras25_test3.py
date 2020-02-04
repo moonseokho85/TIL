@@ -63,7 +63,6 @@ print(x1_train.shape)
 
 from keras.models import Sequential, Model
 from keras.layers import Dense, Input
-model = Sequential()
 
 input1 = Input(shape=(25,)) # 인풋레이어 정의 
 dense1 = Dense(64)(input1) # 차이점은 꼬랑지에 앞에 변수명을 넣어줘야함, 앙상블모델에서 필수적인 요소

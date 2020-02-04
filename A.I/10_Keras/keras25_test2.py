@@ -46,8 +46,8 @@ model = Sequential()
 model.add(LSTM(64, activation='relu', input_shape=(5, 5), return_sequences=True)) # 3: column number & 1: 몇개씩 자르는지
 model.add(LSTM(32, activation='relu'))
 model.add(Dense(128, input_shape=(25,)))
-model.add(Dense(64))
-model.add(Dense(32))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(32, activation='relu'))
 model.add(Dense(1))
 
 # 모델 요약

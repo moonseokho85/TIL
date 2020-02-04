@@ -54,11 +54,15 @@ x_test_scaled = scaler.transform(x_test)
 
 print(x_train_scaled[0, :])
 
-from keras.models import Sequential
-from keras.layers import Dense
-model = Sequential()
+# Data Reshape to LSTM
+x_train_scaled = np.reshape(x_train_scaled, (x_train_scaled.shape[0], 5, 5))
+x_test_scaled = np.reshape(x_test_scaled, (x_test_scaled.shape[0], 5, 5))
 
-model.add(Dense(64, input_shape=(25,)))
+from keras.models import Sequential
+from keras.layers import Dense, LSTM
+
+model = Sequential()
+model.add(LSTM(64, activation='relu', input_shape=(5, 5)))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(32, activation='relu'))
 model.add(Dense(32, activation='relu'))

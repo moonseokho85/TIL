@@ -61,7 +61,7 @@ model.compile(loss='mse', optimizer='adam', metrics=["mae"]) # kinds of loss = [
 # EarlyStopping 선언
 from keras.callbacks import EarlyStopping, TensorBoard
 
-early_stopping = EarlyStopping(monitor='loss', patience=100, mode='auto')
+early_stopping = EarlyStopping(monitor='loss', patience=1000, mode='auto')
 
 tb_hist = TensorBoard(log_dir='./graph', histogram_freq=0, write_grads=True, write_images=True)
 

@@ -7,16 +7,14 @@ iris_data = pd.read_csv('./data/iris2.csv', encoding='utf-8')
 y = iris_data.loc[:, "Name"]
 x = iris_data.loc[:, ["SepalLength", "SepalWidth", "PetalLength", "PetalWidth"]]
 
-# Spliting Data to Train and Test set
-import warnings
-warnings.filterwarnings('ignore')
-from sklearn.model_selection import train_test_split
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, train_size=0.8, shuffle=True)
-
 # Extracting All classifier algorithm
+import warnings
 warnings.filterwarnings('ignore')
 from sklearn.utils.testing import all_estimators
 allAlgorithms = all_estimators(type_filter="classifier")
+
+from sklearn.model_selection import KFold
+kfold_cv = KFold(n_splits=5, shuffle=True)
 
 print(allAlgorithms)
 print(len(allAlgorithms))
@@ -27,10 +25,8 @@ for (name, algorithm) in allAlgorithms:
     # Producing each algorithms
     clf = algorithm()
     
-    # Fitting and predicting
-    clf.fit(x_train, y_train)
-    y_pred = clf.predict(x_test)
-    
-    # Scoring models
-    from sklearn.metrics import accuracy_score
-    print(name, "의 정답률: ", accuracy_score(y_test, y_pred))
+    if hasattr(clf, 'score'):
+        from sklearn.model_selection import cross_val_score
+        scores = cross_val_score(clf, x, y, cv=kfold_cv) # cross_val_score 안에 model.fit이 포함되어 있다.
+        print(name, "의 정답률: ")
+        print(scores)

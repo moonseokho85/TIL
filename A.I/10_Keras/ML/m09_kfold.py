@@ -14,7 +14,7 @@ from sklearn.utils.testing import all_estimators
 allAlgorithms = all_estimators(type_filter="classifier")
 
 from sklearn.model_selection import KFold
-kfold_cv = KFold(n_splits=5, shuffle=True)
+kfold_cv = KFold(n_splits=10, shuffle=True)
 
 print(allAlgorithms)
 print(len(allAlgorithms))
@@ -27,6 +27,9 @@ for (name, algorithm) in allAlgorithms:
     
     if hasattr(clf, 'score'):
         from sklearn.model_selection import cross_val_score
-        scores = cross_val_score(clf, x, y, cv=kfold_cv) # cross_val_score 안에 model.fit이 포함되어 있다.
+        scores = cross_val_score(clf, x, y, cv=kfold_cv) # cross_val_score function include model.fit
+        import numpy as np
+        a = np.array(scores)
+        AVG = np.mean(a)
         print(name, "의 정답률: ")
-        print(scores)
+        print(AVG)

@@ -23,13 +23,15 @@ from sklearn.model_selection import KFold
 kfold_cv = KFold(n_splits=5, shuffle=True)
 
 # GridSearch
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
+from sklearn.model_selection import RandomizedSearchCV
 from sklearn.svm import SVC
-model = RandomizedSearchCV(SVC(), parameters, cv=kfold_cv)
+model = RandomizedSearchCV(SVC(), parameters, cv=kfold_cv, n_jobs=-1)
 model.fit(x_train, y_train)
 print("Optimal parameter: ", model.best_estimator_)
 
 # Evaluating in optimal parameter
 y_pred = model.predict(x_test)
+print(y_pred)
+
 from sklearn.metrics import accuracy_score
 print('Final accuracy: ', accuracy_score(y_test, y_pred))

@@ -29,6 +29,7 @@ def split_xy5(dataset, time_steps, y_column):
         
     return np.array(x), np.array(y)
 
+
 x, y = split_xy5(samsung, 25, 5)
 print(x.shape)
 print(y.shape)

@@ -20,7 +20,10 @@ data2.astype(float)
 data1 = np.asarray(data1)
 data2 = np.asarray(data2)
 print(data1)
+print(data1.shape)
 print(data2)
+print(data2.shape)
+
 
 from numpy import array
 

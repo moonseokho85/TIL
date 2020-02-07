@@ -39,7 +39,7 @@ hyperparamters = create_hyperparamter()
 
 from sklearn.model_selection import RandomizedSearchCV
 search = RandomizedSearchCV(estimator=model, param_distributions=hyperparamters, n_iter=10, n_jobs=1, cv=3, verbose=1)
-
+# n_jobs 는 -1로 모두 다쓴다.
 search.fit(X_train, Y_train)
 
 print(search.best_params_)

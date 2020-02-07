@@ -1,13 +1,16 @@
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
 
 cancer = load_breast_cancer()
 X_train, X_test, y_train, y_test = train_test_split(cancer.data, cancer.target, stratify=cancer.target, random_state=42)
 
 # tree = DecisionTreeClassifier(random_state=0)
-tree = RandomForestClassifier(random_state=0)
+# tree = RandomForestClassifier(random_state=0)
+# tree = GradientBoostingClassifier(random_state=0)
+tree = XGBClassifier(random_state=0)
 tree.fit(X_train, y_train)
 
 print("훈련 세트 정확도: {:.3f}".format(tree.score(X_train, y_train)))

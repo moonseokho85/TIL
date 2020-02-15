@@ -1,7 +1,7 @@
 from sklearn.datasets import load_breast_cancer
-from sklearn.preprocessing import StandardScaler
 cancer = load_breast_cancer()
 
+from sklearn.preprocessing import StandardScaler
 scaler = StandardScaler()
 scaler.fit(cancer.data)
 X_scaled = scaler.transform(cancer.data)

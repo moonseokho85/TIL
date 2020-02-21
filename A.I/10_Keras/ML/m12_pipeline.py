@@ -21,7 +21,6 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler, StandardScaler
 from sklearn.svm import SVC
 
-
 model = Pipeline([("scaler", MinMaxScaler()), ('svm', SVC())])
 
 #### Fitting Model

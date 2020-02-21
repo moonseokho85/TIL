@@ -25,7 +25,7 @@ kfold_cv = KFold(n_splits=5, shuffle=True)
 # GridSearch
 from sklearn.model_selection import GridSearchCV
 from sklearn.svm import SVC
-model = GridSearchCV(SVC(), parameters, cv=kfold_cv)
+model = GridSearchCV(SVC(), parameters, cv=kfold_cv, n_jobs=-1)
 model.fit(x_train, y_train)
 print("Optimal parameter: ", model.best_estimator_)
 

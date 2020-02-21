@@ -11,9 +11,8 @@ import numpy as np
 x_train = x_train.reshape(x_train.shape[0], 28, 28, 1).astype('float32') / 255
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1).astype('float32') / 255
 
-from keras.utils import np_utils
-
 # One-Hot Encoding
+from keras.utils import np_utils
 y_train = np_utils.to_categorical(y_train)
 y_test = np_utils.to_categorical(y_test)
 

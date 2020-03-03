@@ -16,3 +16,5 @@ print(find_same_name(name))
 
 name2 = ["Tom", "Jerry", "Mike", "Tom", "Mike"]
 print(find_same_name(name2))
+
+# => 리스트에 있는 자료를 모두 비교하는 방법

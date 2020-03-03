@@ -2,8 +2,8 @@
 
 def find_all_combination(a):
     n = len(a)
-    for i in range(0, n - 1):
-        for j in range(i + 1, n):
+    for i in range(0, n - 1): # 0부터 n - 2까지 반복
+        for j in range(i + 1, n): # i + 1부터 n - 1까지 반복
             print(a[i], " - ", a[j])
             
 name = ["Tom", "Jerry", "Mike"]

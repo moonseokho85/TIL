@@ -69,5 +69,29 @@
     <ClCompile Include="18_DR_think_3.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="19_Function_WO.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="20_Function_W.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="21_Function_call.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="22_function_2input.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="23_function_declare.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="24_function_int.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="25_function_void.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="26_function_void2.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

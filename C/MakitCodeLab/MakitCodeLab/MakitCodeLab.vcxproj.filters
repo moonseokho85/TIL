@@ -93,5 +93,26 @@
     <ClCompile Include="26_function_void2.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="27_function_return.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="28_function_variable.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="29_static_variable.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="30_global_variable.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="31_static_global.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="32_function_mission1.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="33_function_mission_answer.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

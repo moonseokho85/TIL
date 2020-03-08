@@ -114,5 +114,47 @@
     <ClCompile Include="33_function_mission_answer.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="34_assignment.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="35_inc_dec.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="36_inc_dec2.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="37_math_operator.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="38_odd_even.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="39_shorthand.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="40_relational.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="41_logical.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="42_if_else.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="43_conditional.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="44_true.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="45_condition_mission1.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="46_bit_operator.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="47_bit_shift.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

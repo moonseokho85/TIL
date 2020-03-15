@@ -48,5 +48,6 @@ for i in range(int(N)):
 string = ""     # 결과 출력 변수
 # 결과 포맷에 맞게 출력
 for i in range(int(N)):
+    print(Answer[i])
     string = string + str(Answer[i]+1) + " "
 print(string)    

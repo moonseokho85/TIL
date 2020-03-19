@@ -1,7 +1,13 @@
+# Baekjun Algorithm No.15552
+# Input: T, A, B
+# Output: A + B
+
 import sys
 
+# define the number of testcase as T
 T = sys.stdin.readline()
 
+# convert string to int
 t = int(T)
 
 list_one = []

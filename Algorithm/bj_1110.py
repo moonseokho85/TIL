@@ -1,11 +1,19 @@
+# Baekjoon Algorithm No.1110
+# Input: N
+# Output: 원래 수로 돌아오는 사이클의 길이
+
 import sys
 
+# 입력
 N = sys.stdin.readline()
 
+# int형으로 변환
 n = int(N)
 
+# 답을 선언
 answer = n
 
+# 사이클의 길이
 count = 0
 
 while True:

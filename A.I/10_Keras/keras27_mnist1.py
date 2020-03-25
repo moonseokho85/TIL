@@ -37,4 +37,3 @@ model.fit(x_train, y_train, validation_split=0.2, batch_size=8, epochs=100, verb
 loss, acc = model.evaluate(x_test, y_test)
 print("loss: ", loss)
 print("acc: ", acc)
-

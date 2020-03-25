@@ -156,5 +156,14 @@
     <ClCompile Include="47_bit_shift.c">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="48_complement.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="49_room_onoff1.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="50_room_onoff2.c">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

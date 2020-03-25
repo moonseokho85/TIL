@@ -1,4 +1,4 @@
-# Baekjun Algorithm No.2523
+# Baekjun Algorithm No.2446
 # Print star
 # Input: N
 # Output: '*'

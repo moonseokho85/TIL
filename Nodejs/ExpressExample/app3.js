@@ -3,6 +3,7 @@ var http = require('http');
 
 var app = express();
 
+// 첫 번째 미들웨어
 app.use(function(req, res, next){
     console.log('첫 번째 미들웨어에서 요청을 처리함.');
 
@@ -11,8 +12,10 @@ app.use(function(req, res, next){
     next();
 });
 
+// 두 번째 미들웨어
 app.use(function(req, res, next){
     console.log('두 번째 미들웨어에서 요청을 처리함.');
+    // console.log("----------------------------------------")
     // console.log('req: ', req)
     // console.log('res: ', res)
 

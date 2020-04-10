@@ -88,6 +88,31 @@ var authUser = function (database, id, password, callback) {
     })
 }
 
+// 사용자를 추가하는 함수
+var addUser = function (database, id, password, name, callback) {
+    console.log('addUser 호출됨: ' + id + ', ' + password + ', ' + name);
+
+    // users 컬렉션 참조
+    var users = database.collection('users');
+
+    // id, password, username을 사용해 사용자 추가
+    users.insertMany([{ "id": id, "password": password, "name": name }], function (err, result) {
+        if (err) { // 오류가 발생했을 때 콜백 함수를 호출하면서 오류 객체 전달
+            callback(err, null);
+            return;
+        }
+
+        // 오류가 아닌 경우, 콜백 함수를 호출하면서 결과 객체 전달
+        if (result.insertedCount > 0) {
+            console.log("사용자 레코드 추가됨: " + result.insertedCount);
+        } else {
+            console.log("추가된 레코드가 없음");
+        }
+
+        callback(null, result);
+    })
+}
+
 // 라우터 객체 참조
 var router = express.Router();
 
@@ -147,6 +172,40 @@ router.route('/process/login').post(function (req, res) {
     //     res.end();
     // }
 });
+
+router.route('/process/adduser').post(function (req, res) {
+    console.log('/process/adduser 호출됨');
+
+    var paramId = req.body.id || req.query.id;
+    var paramPassword = req.body.password || req.query.password;
+    var paramName = req.body.name || req.query.name;
+
+    console.log('요청 파라미터: ' + paramId + ', ' + paramPassword + ', ' + paramName);
+
+    // 데이터베이스 객체가 초기화된 경우, addUser 함수 호출하여 사용자 추가
+    if (database) {
+        addUser(database, paramId, paramPassword, paramName, function (err, result) {
+            if (err) { throw err; }
+
+            // 결과 객체 확인하여 추가된 데이터 있으면 성공 응답 전송
+            if (result && result.insertedCount > 0) {
+                console.dir(result);
+
+                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+                res.write('<h2>사용자 추가 성공</h2>')
+                res.end();
+            } else {
+                res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+                res.write('<h2>사용자 추가 실패</h2>')
+                res.end();
+            }
+        })
+    } else {
+        res.writeHead('200', { 'Content-Type': 'text/html;charset=utf8' });
+        res.write('<h2>데이터베이스 연결 실패</h2>')
+        res.end();
+    }
+})
 
 // 라우터 객체 등록
 app.use('/', router);

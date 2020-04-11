@@ -43,19 +43,19 @@ app.use(expressSession({
 }));
 
 // 몽고디비 모듈 사용
+var mongodb = require('mongodb')
 var MongoClient = require('mongodb').MongoClient;
 
 // mongoose 모듈 불러들이기
 var mongoose = require('mongoose');
 
-// 데이터베이스 객체를 위한 변수 선언
-var database;
 
-// 데이터베이스 스키마 객체를 위한 변수 선언
-var UserSchema;
+//===== 데이터 베이스 연결 =====//
 
-// 데이터베이스 모델 객체를 위한 변수 선언
-var UserModel;
+var database; // 데이터베이스 객체를 위한 변수 선언
+var UserSchema; // 데이터베이스 스키마 객체를 위한 변수 선언
+var UserModel; // 데이터베이스 모델 객체를 위한 변수 선언
+
 
 // 데이터 베이스에 연결
 function connectDB() {
@@ -65,43 +65,85 @@ function connectDB() {
     // 데이터 베이스 연결
     console.log('데이터 베이스 연결을 시도합니다.');
     mongoose.Promise = global.Promise;
-    mongoose.connect(databaseUrl, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true });
+    mongoose.connect(databaseUrl, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true });
     database = mongoose.connection;
 
     database.on('error', console.error.bind(console, 'mongoose connection error.'));
     database.on('open', function () {
         console.log('데이터베이스에 연결되었습니다.: ' + databaseUrl);
-    })
 
-    // 스키마 정의
-    UserSchema = mongoose.Schema({
-        id: { type: String, required: true, unique: true },
-        password: { type: String, required: true },
-        name: { type: String, index: 'hashed' },
-        age: { type: Number, 'default': -1 },
-        created_at: { type: Date, index: { unique: false }, 'default': Date.now },
-        updated_at: { type: Date, index: { unique: false }, 'default': Date.now }
+        // user 스키마 및 모델 객체 생성
+        createUserSchema();
+
+        // test 진행함
+        doTest();
     });
-
-    // 스키마에 static 메소드 추가
-    UserSchema.static('findById', function (id, callback) {
-        return this.find({ id: id }, callback)
-    })
-
-    UserSchema.static('findAll', function (callback) {
-        return this.find({}, callback);
-    })
-
-    console.log('UserSchema 정의함')
-
-    // UserModel 모델 정의
-    UserModel = mongoose.model("users2", UserSchema);
-    console.log("UserModel 정의함.");
 
     // 연결 끊어졌을 때 5초 후 재연결
     database.on('disconnected', function () {
         console.log('연결이 끊어졌습니다. 5초 후 다시 연결합니다.');
         setInterval(connectDB, 5000);
+    });
+
+    // user 스키마 및 모델 객체 생성
+    function createUserSchema() {
+        
+        // 스키마 정의
+        // password를 hashed_password로 변경, default 속성 모두 추가, salt 속성 추가
+        UserSchema = mongoose.Schema({
+            id: { type: String, required: true, unique: true },
+            name: { type: String, index: 'hashed', 'default':'' },
+            age: { type: Number, 'default': -1 },
+            created_at: { type: Date, index: { unique: false }, 'default': Date.now },
+            updated_at: { type: Date, index: { unique: false }, 'default': Date.now }
+        });
+
+        // info를 virtual 메소드로 정의
+        UserSchema
+            .virtual('info')
+            .set(function(info){
+                var splitted = info.split(' ');
+                this.id = splitted[0];
+                this.name = splitted[1];
+                console.log('virtual info 설정함 : %s, %s', this.id, this.name);
+            })
+            .get(function(){
+                return this.id + ' ' + this.name
+            });
+        
+        console.log('UserSchema 정의함')
+        
+        // UserModel 모델 정의
+        UserModel = mongoose.model("users4", UserSchema);
+        console.log("UserModel 정의함.");
+    }
+}
+
+function doTest() {
+    // UserModel 인스턴스 생성
+    // id, name 속성은 할당하지 않고 info 속성만 할당함
+    var user = new UserModel({"info" : 'test01 소녀시대'})
+
+    // save()로 저장
+    user.save(function(err){
+        if(err){throw err;}
+
+        console.log("사용자 데이터 추가함")
+
+        findAll();
+    });
+
+    console.log('info속성에 값 할당함.');
+    console.log('id: %s, name: %s', user.id, user.name);
+}
+
+function findAll(){
+    UserModel.find({}, function(err, results){
+        if(err){throw err;}
+
+        if(results){
+            console.log('조회된 user 문서 객체 #0 -> id : %s, name: %s', results[0]._doc.id, results[0]._doc.name);
+        }
     });
 }
 

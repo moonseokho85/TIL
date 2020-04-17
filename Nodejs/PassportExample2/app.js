@@ -69,7 +69,7 @@ app.use(passport.session());
 app.use(flash());
 
 var configPassport = require('./config/passport');
-configPassport(app, config);
+configPassport(app, passport);
 
 var router = express.Router();
 route_loader.init(app, router);

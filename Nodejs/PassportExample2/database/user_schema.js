@@ -11,7 +11,10 @@ Schema.createSchema = function (mongoose) {
         salt: { type: String, required: true },
         name: { type: String, index: 'hashed', 'default': ' ' },
         created_at: { type: Date, index: { unique: false }, 'default': Date.now },
-        updated_at: { type: Date, index: { unique: false }, 'default': Date.now }
+        updated_at: { type: Date, index: { unique: false }, 'default': Date.now },
+        provider: {type: String, 'default': ''},
+        authToken: {type: String, 'default': ''},
+        facebook: {}
     });
 
     // 필수 속성에 대한 유효성 확인(길이 값 체크)

@@ -4,7 +4,7 @@
   "description": "",
   "main": "calc.js",
   "dependencies": {
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "nconf": "0.10.0",
     "winston": "3.2.1",
     "winston-daily-rotate-file": "4.4.2"
